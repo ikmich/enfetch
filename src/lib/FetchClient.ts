@@ -1,4 +1,7 @@
 import { FetchClientInit, FetchClientOpts, Headers } from "./_meta";
+import { Request, Response } from "node-fetch";
+
+const fetch = require("node-fetch");
 
 export class FetchClient {
   protected baseUri: string = "";
@@ -41,6 +44,10 @@ export class FetchClient {
     return await this.sendRequest("PUT", path, opts);
   }
 
+  public async patch(path: string, opts?: FetchClientOpts) {
+    return await this.sendRequest("PATCH", path, opts);
+  }
+
   public async del(path: string, opts?: FetchClientOpts) {
     return await this.sendRequest("DELETE", path, opts);
   }
@@ -80,7 +87,7 @@ export class FetchClient {
     if (opts.multipartBody) {
       init.body = opts.multipartBody;
 
-      // delete content-type header
+      // delete content-type header, for multipart/form-data request
       delete init.headers["Content-Type"];
     }
 

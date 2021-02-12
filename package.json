@@ -2,19 +2,26 @@
   "name": "fetchclient",
   "version": "0.0.1-alpha",
   "description": "Utility class to make HTTP requests with the fetch api",
-  "main": "dist/index.ts",
+  "main": "./dist/index.ts",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf ./dist && tsc",
     "tscheck": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand --detectOpenHandles --forceExit --passWithNoTests --verbose --useStderr"
   },
   "author": "Ikenna Agbasimalo <michfx@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/faker": "^5.1.6",
+    "@types/node": "^14.14.27",
     "@types/node-fetch": "^2.5.8",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "ts-jest": "^26.5.1",
+    "typescript": "^4.1.5"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "faker": "^5.4.0",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1"
   },
   "keywords": [
