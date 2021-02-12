@@ -1,0 +1,32 @@
+{
+  "name": "fetchclient",
+  "version": "0.0.1-alpha",
+  "description": "Utility class to make HTTP requests with the fetch api",
+  "main": "dist/index.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "tscheck": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ikenna Agbasimalo <michfx@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node-fetch": "^2.5.8",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "keywords": [
+    "fetch",
+    "fetch api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "email": "michfx@gmail.com",
+    "url": "https://github.com/ikmich/fetchclient/issues"
+  }
+}
