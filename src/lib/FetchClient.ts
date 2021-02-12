@@ -27,7 +27,7 @@ export class FetchClient {
   }
 
   protected buildUrl(path: string): string {
-    return `${this.baseUri}${path}`;
+    return `${this.baseUri}/${path}`.replace(/\/{2,}/g, '/');
   }
 
   // ----
