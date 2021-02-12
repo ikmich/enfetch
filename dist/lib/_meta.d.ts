@@ -1,3 +1,4 @@
+import { Response } from "node-fetch";
 export declare type Headers = {
     [k: string]: string;
 };

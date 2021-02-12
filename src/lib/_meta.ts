@@ -1,4 +1,7 @@
+import {Response} from "node-fetch";
+
 export type Headers = { [k: string]: string };
+
 
 export type QueryParams = {
   [k: string]: any;

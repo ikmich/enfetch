@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FetchClient = void 0;
+const node_fetch_1 = require("node-fetch");
+const fetch = require("node-fetch");
 class FetchClient {
     constructor(init) {
         var _a, _b;
@@ -30,6 +32,9 @@ class FetchClient {
     async put(path, opts) {
         return await this.sendRequest("PUT", path, opts);
     }
+    async patch(path, opts) {
+        return await this.sendRequest("PATCH", path, opts);
+    }
     async del(path, opts) {
         return await this.sendRequest("DELETE", path, opts);
     }
@@ -51,10 +56,10 @@ class FetchClient {
         }
         if (opts.multipartBody) {
             init.body = opts.multipartBody;
-            // delete content-type header
+            // delete content-type header, for multipart/form-data request
             delete init.headers["Content-Type"];
         }
-        const req = new Request(url, init);
+        const req = new node_fetch_1.Request(url, init);
         const response = await fetch(req);
         if (opts === null || opts === void 0 ? void 0 : opts.responseHandler) {
             opts === null || opts === void 0 ? void 0 : opts.responseHandler(response);
