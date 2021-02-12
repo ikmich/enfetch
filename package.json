@@ -2,7 +2,7 @@
   "name": "fetchclient",
   "version": "0.0.1-alpha",
   "description": "Utility class to make HTTP requests with the fetch api",
-  "main": "./dist/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "tscheck": "tsc --noEmit",
