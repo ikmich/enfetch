@@ -1,33 +1,32 @@
 # Utility class to make HTTP requests with the fetch api
 
 # Usage
+
 ```javascript
 // Instantiate object
 const fc = new FetchClient({
-  baseUri: 'http://example.api',
+  baseUri: "http://example.api",
   headers: {
-    'Authorization': '<token>'
-  }
+    Authorization: "<token>",
+  },
 });
 
-// GET request
-const response = await fc.get('/comments');
-const respBody = fc.json(response);
+// Sample GET request
+res = await fc.get("/comments");
+const resBody = fc.json(res);
+console.log(resBody);
 
-const raw = await fc.post('/comments/', {
+// Sample POST request
+const raw = await fc.post("/comments/", {
   jsonBody: {
-    text: 'My first comment',
-    author: 'Johnny Brass'
-  }
+    text: "My first comment",
+    author: "Johnny Brass",
+  },
+  async responseHandler(response) {
+    if (response.status >= 400) {
+      throw new Error(response.statusText + " - " + (await response.text()));
+    }
+  },
 });
-
-const raw = await fc.put('/comments/45', {
-  text: 'My original comment'
-});
-
-//const response = await 
-```
-
-```javascript
-
+console.log(resBody);
 ```
