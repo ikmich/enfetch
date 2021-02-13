@@ -10,14 +10,20 @@ const fc = new FetchClient({
     Authorization: "<token>",
   },
 });
+```
 
+```javascript
 // Sample GET request
-res = await fc.get("/comments");
-const resBody = fc.json(res);
+const fc: FetchClient = new FetchClient(/*{opts}*/);
+const res = await fc.get("/comments");
+const resBody = await fc.json(res);
 console.log(resBody);
+```
 
+```javascript
 // Sample POST request
-const raw = await fc.post("/comments/", {
+const fc: FetchClient = new FetchClient(/*{opts}*/);
+const res = await fc.post("/comments", {
   jsonBody: {
     text: "My first comment",
     author: "Johnny Brass",
@@ -28,5 +34,30 @@ const raw = await fc.post("/comments/", {
     }
   },
 });
+
+const resBody = await fc.json(res);
 console.log(resBody);
+```
+
+```javascript
+// Wrap in Promise...
+function sendRequest(): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const fc: FetchClient = new FetchClient(/*{opts}*/);
+    fc.post("/comments", {
+      jsonBody: { text: "My next comment" },
+      async responseHandler(res) {
+        if (res.status >= 400) {
+          return reject(new Error(res.statusText + "::" + (await res.text())));
+        }
+      },
+    })
+      .then((res: Response) => {
+        return fc.json(res);
+      })
+      .then((resBody: any) => {
+        return resolve(resBody);
+      });
+  });
+}
 ```
