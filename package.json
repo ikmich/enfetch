@@ -1,5 +1,5 @@
 {
-  "name": "fetchclient",
+  "name": "enfetch",
   "version": "0.0.1-alpha",
   "description": "Utility class to make HTTP requests with the fetch api",
   "main": "dist/index.js",
@@ -34,6 +34,6 @@
   },
   "bugs": {
     "email": "michfx@gmail.com",
-    "url": "https://github.com/ikmich/fetchclient/issues"
+    "url": "https://github.com/ikmich/enfetch/issues"
   }
 }

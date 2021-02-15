@@ -4,7 +4,7 @@
 
 ```javascript
 // Instantiate object
-const fc = new FetchClient({
+const ef = new Enfetch({
   baseUri: "http://example.api",
   headers: {
     Authorization: "<token>",
@@ -14,16 +14,16 @@ const fc = new FetchClient({
 
 ```javascript
 // Sample GET request
-const fc: FetchClient = new FetchClient(/*{opts}*/);
-const res = await fc.get("/comments");
-const resBody = await fc.json(res);
+const ef: Enfetch = new Enfetch(/*{opts}*/);
+const res = await ef.get("/comments");
+const resBody = await ef.json(res);
 console.log(resBody);
 ```
 
 ```javascript
 // Sample POST request
-const fc: FetchClient = new FetchClient(/*{opts}*/);
-const res = await fc.post("/comments", {
+const ef: Enfetch = new Enfetch(/*{opts}*/);
+const res = await ef.post("/comments", {
   jsonBody: {
     text: "My first comment",
     author: "Johnny Brass",
@@ -35,7 +35,7 @@ const res = await fc.post("/comments", {
   },
 });
 
-const resBody = await fc.json(res);
+const resBody = await ef.json(res);
 console.log(resBody);
 ```
 
@@ -43,8 +43,8 @@ console.log(resBody);
 // Wrap in Promise...
 function sendRequest(): Promise<any> {
   return new Promise((resolve, reject) => {
-    const fc: FetchClient = new FetchClient(/*{opts}*/);
-    fc.post("/comments", {
+    const ef: Enfetch = new Enfetch(/*{opts}*/);
+    ef.post("/comments", {
       jsonBody: { text: "My next comment" },
       async responseHandler(res) {
         if (res.status >= 400) {
@@ -53,7 +53,7 @@ function sendRequest(): Promise<any> {
       },
     })
       .then((res: Response) => {
-        return fc.json(res);
+        return ef.json(res);
       })
       .then((resBody: any) => {
         return resolve(resBody);

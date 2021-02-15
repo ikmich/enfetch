@@ -1,8 +1,8 @@
-import { FetchClient } from "../lib/FetchClient";
+import { Enfetch } from "../lib/Enfetch";
 import * as faker from "faker";
 
 const baseUri = "https://jsonplaceholder.typicode.com";
-let fc: FetchClient;
+let enf: Enfetch;
 
 let context: any = {
   postId: 1,
@@ -10,24 +10,16 @@ let context: any = {
 
 describe("HTTP calls", () => {
   beforeEach(() => {
-    fc = new FetchClient({
+    enf = new Enfetch({
       baseUri,
     });
   });
 
-  it("makes GET request", async (done) => {
-    const res = await fc.get(`/posts/${context.postId}`);
-    const resBody = await fc.json(res);
-    expect(resBody).toBeDefined();
-    expect(typeof resBody).toBe("object");
-    done();
-  });
-
   it(`works with 'addHeaders'`, async (done) => {
-    fc.addHeaders({
+    enf.addHeaders({
       Authorization: "Test Token",
     });
-    const res = await fc.get(`/posts/${context.postId}`, {
+    const res = await enf.get(`/posts/${context.postId}`, {
       async responseHandler(response) {
         if (response.status >= 400) {
           throw new Error(
@@ -36,9 +28,17 @@ describe("HTTP calls", () => {
         }
       },
     });
-    const resBody = await fc.json(res);
+    const resBody = await enf.json(res);
     expect(resBody).toBeDefined();
-    expect(typeof resBody).toBe('object');
+    expect(typeof resBody).toBe("object");
+    done();
+  });
+
+  it("makes GET request", async (done) => {
+    const res = await enf.get(`/posts/${context.postId}`);
+    const resBody = await enf.json(res);
+    expect(resBody).toBeDefined();
+    expect(typeof resBody).toBe("object");
     done();
   });
 
@@ -49,11 +49,11 @@ describe("HTTP calls", () => {
       body: faker.lorem.sentence(),
     };
 
-    const res = await fc.post("/posts/", {
+    const res = await enf.post("/posts/", {
       jsonBody: body,
     });
 
-    const resBody = await fc.json(res);
+    const resBody = await enf.json(res);
     expect(resBody).toBeDefined();
     expect(typeof resBody).toBe("object");
     expect(resBody).toHaveProperty("id");
@@ -67,7 +67,7 @@ describe("HTTP calls", () => {
       body: faker.lorem.sentence(),
     };
 
-    const res = await fc.patch(`/posts/${context.postId}`, {
+    const res = await enf.patch(`/posts/${context.postId}`, {
       jsonBody: body,
       async responseHandler(response) {
         if (response.status >= 400) {
@@ -78,14 +78,14 @@ describe("HTTP calls", () => {
       },
     });
 
-    const resBody = await fc.json(res);
+    const resBody = await enf.json(res);
     expect(resBody).toBeDefined();
     expect(typeof resBody).toBe("object");
     done();
   });
 
   it("makes DELETE request", async (done) => {
-    const res = await fc.del(`/posts/${context.postId}`, {
+    const res = await enf.del(`/posts/${context.postId}`, {
       async responseHandler(response) {
         if (response.status >= 400) {
           throw new Error(
@@ -95,7 +95,7 @@ describe("HTTP calls", () => {
       },
     });
 
-    const resBody = await fc.json(res);
+    const resBody = await enf.json(res);
     expect(resBody).toBeDefined();
     expect(typeof resBody).toBe("object");
     done();

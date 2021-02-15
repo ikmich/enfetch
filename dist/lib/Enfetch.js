@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FetchClient = void 0;
+exports.Enfetch = void 0;
 const node_fetch_1 = require("node-fetch");
 const fetch = require("node-fetch");
-class FetchClient {
+class Enfetch {
     constructor(init) {
         var _a, _b;
         this.baseUri = "";
@@ -20,7 +20,7 @@ class FetchClient {
         this.headers = Object.assign(Object.assign({}, this.headers), headers);
     }
     buildUrl(path) {
-        return `${this.baseUri}${path}`;
+        return `${this.baseUri}/${path}`.replace(/\/{2,}/g, '/');
     }
     // ----
     async get(path, opts) {
@@ -70,4 +70,4 @@ class FetchClient {
         return JSON.parse(await response.text());
     }
 }
-exports.FetchClient = FetchClient;
+exports.Enfetch = Enfetch;

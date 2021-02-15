@@ -1,9 +1,9 @@
-import { FetchClientInit, FetchClientOpts, Headers } from "./_meta";
+import { EnfetchInit, EnfetchOpts, Headers } from "./_meta";
 import { Request, Response } from "node-fetch";
 
 const fetch = require("node-fetch");
 
-export class FetchClient {
+export class Enfetch {
   protected baseUri: string = "";
 
   protected headers: Headers = {
@@ -14,7 +14,7 @@ export class FetchClient {
     headers: this.headers,
   };
 
-  constructor(init?: FetchClientInit) {
+  constructor(init?: EnfetchInit) {
     this.baseUri = init?.baseUri ?? "";
     this.headers = init?.headers ?? this.headers;
   }
@@ -27,36 +27,33 @@ export class FetchClient {
   }
 
   protected buildUrl(path: string): string {
-    return `${this.baseUri}/${path}`.replace(/\/{2,}/g, '/');
+    path = path.replace(/^\/+/, "");
+    return `${this.baseUri}/${path}`;
   }
 
   // ----
 
-  public async get(path: string, opts?: FetchClientOpts) {
+  public async get(path: string, opts?: EnfetchOpts) {
     return await this.sendRequest("GET", path, opts);
   }
 
-  public async post(path: string, opts?: FetchClientOpts) {
+  public async post(path: string, opts?: EnfetchOpts) {
     return await this.sendRequest("POST", path, opts);
   }
 
-  public async put(path: string, opts?: FetchClientOpts) {
+  public async put(path: string, opts?: EnfetchOpts) {
     return await this.sendRequest("PUT", path, opts);
   }
 
-  public async patch(path: string, opts?: FetchClientOpts) {
+  public async patch(path: string, opts?: EnfetchOpts) {
     return await this.sendRequest("PATCH", path, opts);
   }
 
-  public async del(path: string, opts?: FetchClientOpts) {
+  public async del(path: string, opts?: EnfetchOpts) {
     return await this.sendRequest("DELETE", path, opts);
   }
 
-  public async sendRequest(
-    method: string,
-    path: string,
-    opts?: FetchClientOpts
-  ) {
+  public async sendRequest(method: string, path: string, opts?: EnfetchOpts) {
     method = method.toUpperCase();
     let url = this.buildUrl(path);
 
@@ -92,8 +89,8 @@ export class FetchClient {
     }
 
     const req = new Request(url, init);
-
     const response = await fetch(req);
+    // const response = await fetch(url, init);
 
     if (opts?.responseHandler) {
       opts?.responseHandler(response);

@@ -5,11 +5,11 @@ export declare type Headers = {
 export declare type QueryParams = {
     [k: string]: any;
 };
-export declare type FetchClientInit = {
+export declare type EnfetchInit = {
     baseUri?: string;
     headers?: Headers;
 };
-export declare type FetchClientOpts = {
+export declare type EnfetchOpts = {
     headers?: Headers;
     jsonBody?: object;
     multipartBody?: FormData;

@@ -7,12 +7,12 @@ export type QueryParams = {
   [k: string]: any;
 };
 
-export type FetchClientInit = {
+export type EnfetchInit = {
   baseUri?: string;
   headers?: Headers;
 };
 
-export type FetchClientOpts = {
+export type EnfetchOpts = {
   headers?: Headers;
   jsonBody?: object;
   multipartBody?: FormData;

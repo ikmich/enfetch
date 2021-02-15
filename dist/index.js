@@ -11,4 +11,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./lib/_meta"), exports);
-__exportStar(require("./lib/FetchClient"), exports);
+__exportStar(require("./lib/Enfetch"), exports);
